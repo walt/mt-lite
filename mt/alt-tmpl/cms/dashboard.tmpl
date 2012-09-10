@@ -1,0 +1,39 @@
+<mt:include name="mtb-include/config.tmpl">
+<mt:include name="mtb-include/header.tmpl">
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span2">
+			<div class="mtl-nav">
+				<div class="well">
+					<ul class="nav nav-list">
+						<li class="active"><a href="<$mt:var name="mt_url"$>">Blogs</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="span10">
+			<div class="mtl-header">
+				<h1>Blogs</h1>
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Posts</th>
+					</tr>
+				</thead>
+				<tbody>
+<mt:blogs>
+					<tr>
+						<td><a href="<$mt:var name="mt_url"$>?__mode=list_entry&amp;blog_id=<$mt:BlogID$>"><$mt:BlogName$></a></td>
+						<td><$mt:BlogEntryCount$></td>
+					</tr>
+</mt:blogs>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+<mt:include name="mtb-include/footer.tmpl">

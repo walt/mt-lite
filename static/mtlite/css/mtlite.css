@@ -1,0 +1,20 @@
+.mtl-nav {
+    padding-top: 20px;
+}
+
+.mtl-nav .well {
+     padding: 8px 0;
+}
+
+.mtl-alertbox {
+    padding-top: 20px;
+}
+
+.mtl-header {
+    padding-bottom: 10px;
+    padding-top: 10px;
+}
+
+.mtl-alertbox + .mtl-header {
+    padding-top: 0;
+}

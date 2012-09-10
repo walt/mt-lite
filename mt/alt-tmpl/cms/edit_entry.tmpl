@@ -1,0 +1,98 @@
+<mt:include name="mtb-include/config.tmpl">
+<mt:include name="mtb-include/header.tmpl">
+
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span2">
+			<div class="mtl-nav">
+				<div class="well">
+					<ul class="nav nav-list">
+						<li><a href="<$mt:var name="mt_url"$>">Blogs</a></li>
+						<li class="divider"></li>
+						<li class="nav-header"><$mt:BlogName$></li>
+						<li<mt:if name="new_object"> class="active"</mt:if>><a href="<$mt:var name="mt_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:BlogID$>">New Post</a></li>
+						<li><a href="<$mt:var name="mt_url"$>?__mode=list_entry&amp;blog_id=<$mt:BlogID$>">Posts</a></li>
+						<li><a href="<$mt:var name="mt_url"$>?__mode=rebuild_confirm&amp;blog_id=<$mt:BlogID$>">Rebuild</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="span10">
+<mt:if name="saved_changes">
+			<div class="mtl-alertbox">
+                <div class="alert alert-success">Saved changes.</div>
+            </div>
+</mt:if>
+			<div class="mtl-header">
+<mt:if name="new_object">
+				<h1>New Post</h1>
+<mt:else>
+				<h1>Edit Post</h1>
+</mt:if>
+			</div>
+			<form method="post" action="<$mt:var name="script_url"$>">
+<mt:if name="new_object">
+    			<input type="hidden" name="author_id" value="<$mt:var name="author_id"$>" />
+<mt:else>
+    			<input type="hidden" name="id" value="<$mt:var name="id"$>" />
+</mt:if>
+				<input type="hidden" name="blog_id" value="<$mt:var name="blog_id"$>" />
+		        <input type="hidden" name="__mode" value="save_entry" />
+		        <input type="hidden" name="_type" value="<$mt:var name="object_type"$>" />
+		        <input type="hidden" name="return_args" value="<$mt:var name="return_args" escape="html"$>" />
+		        <input type="hidden" name="magic_token" value="<$mt:var name="magic_token"$>" />
+		        <input type="hidden" name="convert_breaks" value="markdown_with_smartypants" />
+				<div class="row-fluid">
+					<div class="span9">
+						<div><label>Title</label></div>
+<mt:if name="new_object">
+						<div><input type="text" name="title" autofocus="autofocus" class="span12" /></div>
+<mt:else>
+						<div><input type="text" name="title" value="<$mt:var name="title" escape="html"$>" class="span12" /></div>
+</mt:if>
+						<div><label>Body</label></div>
+<mt:if name="new_object">
+						<div><textarea name="text" rows="20" class="span12"></textarea></div>
+<mt:else>
+						<div><textarea name="text" rows="20" class="span12"><$mt:var name="text" escape="html"$></textarea></div>
+</mt:if>
+					</div>
+					<div class="span3">
+						<div><label>Basename</label></div>
+<mt:if name="new_object">
+						<div><input type="text" name="basename" class="span12" /></div>
+<mt:else>
+						<div><input type="text" name="basename" value="<$mt:var name="basename" escape="html"$>" class="span12" /></div>
+</mt:if>
+						<div><label>Status</label></div>
+						<div>
+							<select name="status" class="span12">
+<mt:if name="new_object">
+								<option value="2">Publish</option>
+								<option value="1">Draft</option>
+<mt:else>
+								<option value="2"<mt:if name="status" eq="2"> selected="selected"</mt:if>>Published</option>
+								<option value="1"<mt:if name="status" eq="1"> selected="selected"</mt:if>>Draft</option>
+</mt:if>
+							</select>
+						</div>
+<mt:unless name="new_object">
+						<div><label>Date &amp; Time</label></div>
+						<div><input type="text" name="authored_on_date" value="<$mt:var name="authored_on_date" escape="html"$>" class="span12" /></div>
+						<div><input type="text" name="authored_on_time" value="<$mt:var name="authored_on_time" escape="html"$>" class="span12" /></div>
+</mt:unless>
+					</div>
+				</div>
+				<div>
+<mt:if name="new_object">
+					<button type="submit" class="btn btn-primary">Create Post</button>
+<mt:else>
+					<button type="submit" class="btn btn-primary">Save Changes</button>
+</mt:if>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<mt:include name="mtb-include/footer.tmpl">
