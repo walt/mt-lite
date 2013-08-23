@@ -1,46 +1,49 @@
-<mt:include name="mtb-include/config.tmpl">
-<mt:include name="mtb-include/header.tmpl">
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span2">
-			<div class="mtl-nav">
-				<div class="well">
-					<ul class="nav nav-list">
-						<li><a href="<$mt:var name="mt_url"$>">Blogs</a></li>
-						<li class="divider"></li>
-						<li class="nav-header"><$mt:BlogName$></li>
-						<li><a href="<$mt:var name="mt_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:BlogID$>">New Post</a></li>
-						<li class="active"><a href="<$mt:var name="mt_url"$>?__mode=list_entry&amp;blog_id=<$mt:BlogID$>">Posts</a></li>
-						<li><a href="<$mt:var name="mt_url"$>?__mode=rebuild_confirm&amp;blog_id=<$mt:BlogID$>">Rebuild</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="span10">
-			<div class="mtl-header">
-				<h1>Posts</h1>
-			</div>
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>Title</th>
-						<th>Date</th>
-						<th>Status</th>
-					</tr>
-				</thead>
-				<tbody>
-<mt:loop name="object_loop">
-					<tr>
-						<td><a href="<$mt:var name="mt_url"$>?__mode=view&amp;_type=entry&amp;id=<$mt:var name="id"$>&amp;blog_id=<$mt:var name="blog_id"$>"><$mt:var name="title" escape="html"$></a></td>
-						<td><$mt:date ts="$authored_on" relative="1"$></td>
-						<td><mt:if name="status" eq="2"$>Published</mt:if><mt:if name="status" eq="1"$>Draft</mt:if></td>
-					</tr>
-</mt:loop>
-				</tbody>
-			</table>
-		</div>
+<div class="container">
+<mt:If name="saved_deleted">
+	<div class="mtl-alertbox">
+		<div class="alert alert-success">Post deleted.</div>
 	</div>
+</mt:If>
+	<div class="mtl-header">
+		<h1>Posts</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:BlogID$>" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign glyphicon-white"></i> New Post</a>
+		</div>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Date</th>
+					<th>Status</th>
+				</tr>
+			</thead>
+			<tbody>
+<mt:Loop name="object_loop">
+				<tr>
+					<td><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;id=<$mt:Var name="id"$>&amp;blog_id=<$mt:Var name="blog_id"$>"><$mt:Var name="title" escape="html"$></a></td>
+					<td><$mt:Date ts="$authored_on" relative="1"$></td>
+					<td>
+						<mt:If name="status" eq="2"$><span class="label label-default">Published</span></mt:If>
+						<mt:If name="status" eq="1"$><span class="label label-warning">Draft</span></mt:If>
+					</td>
+				</tr>
+</mt:Loop>
+			</tbody>
+		</table>
+	</div>
+	<ul class="pager">
+		<li class="previous<mt:Unless name="prev_offset"> disabled</mt:Unless>">
+			<a href="<$mt:Var name="script_url"$>?__mode=list_entry&blog_id=<$mt:BlogID$>&amp;offset=<$mt:Var name="prev_offset_val"$>">&larr; Newer</a>
+		</li>
+		<li class="next<mt:Unless name="next_offset"> disabled</mt:Unless>">
+			<a href="<$mt:Var name="script_url"$>?__mode=list_entry&blog_id=<$mt:BlogID$>&amp;offset=<$mt:Var name="next_offset_val"$>">Older &rarr;</a>
+		</li>
+	</ul>
 </div>
 
-<mt:include name="mtb-include/footer.tmpl">
+<mt:Include name="mtb-include/footer.tmpl">

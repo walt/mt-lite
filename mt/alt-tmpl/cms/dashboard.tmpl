@@ -1,39 +1,66 @@
-<mt:include name="mtb-include/config.tmpl">
-<mt:include name="mtb-include/header.tmpl">
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span2">
-			<div class="mtl-nav">
-				<div class="well">
-					<ul class="nav nav-list">
-						<li class="active"><a href="<$mt:var name="mt_url"$>">Blogs</a></li>
+<div class="container">
+	<div class="mtl-header">
+<mt:Unless name="blog_name">
+		<h1>Blogs</h1>
+<mt:Else>
+		<h1><$mt:Var name="blog_name"$></h1>
+</mt:Unless>
+	</div>
+<mt:Unless name="blog_name">
+	<div class="list-group">
+	<mt:Blogs>
+		<li class="list-group-item">
+			<div class="mtl-listlink">
+				<a href="<$mt:Var name="script_url"$>?__mode=dashboard&amp;blog_id=<$mt:BlogID$>"><$mt:BlogName$></a>
+			</div>
+			<div class="pull-right">
+				<div class="btn-group">
+					<a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:BlogID$>" class="btn btn-success">New Post</a>
+				</div>
+				<div class="btn-group">
+					<a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<i class="glyphicon glyphicon-cog"></i>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu pull-right">
+						<li><a href="<$mt:Var name="script_url"$>?__mode=list_entry&amp;blog_id=<$mt:BlogID$>">Posts</a></li>
+						<li><a href="<$mt:Var name="script_url"$>?__mode=list_template&amp;blog_id=<$mt:BlogID$>">Templates</a></li>
+						<li><a href="<$mt:Var name="script_url"$>?__mode=rebuild_confirm&amp;blog_id=<$mt:BlogID$>">Rebuild</a></li>
 					</ul>
 				</div>
 			</div>
-		</div>
-		<div class="span10">
-			<div class="mtl-header">
-				<h1>Blogs</h1>
+		</li>
+	</mt:Blogs>
+	</div>
+<mt:Else>
+	<div class="row">
+		<div class="col-md-9">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="mtl-stats">
+						<h5>Post Activity</h5>
+						<div id="mtlStatGraph"></div>
+						<p class="text-muted"><span id="mtlStatNote">$1 posts in the past $2 days.</span> <a href="<$mt:Var name="path_to_stats"$>" id="mtlStatSource">XML</a></p>
+					</div>
+				</div>
 			</div>
-			<table class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>Name</th>
-						<th>Posts</th>
-					</tr>
-				</thead>
-				<tbody>
-<mt:blogs>
-					<tr>
-						<td><a href="<$mt:var name="mt_url"$>?__mode=list_entry&amp;blog_id=<$mt:BlogID$>"><$mt:BlogName$></a></td>
-						<td><$mt:BlogEntryCount$></td>
-					</tr>
-</mt:blogs>
-				</tbody>
-			</table>
+		</div>
+		<div class="col-md-3">
+			<div class="mtl-section">
+				<a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:Var name="blog_id"$>" class="btn btn-success btn-lg btn-block">New Post</a>
+			</div>
+			<div class="list-group">
+				<a href="<$mt:Var name="script_url"$>?__mode=list_entry&amp;blog_id=<$mt:Var name="blog_id"$>" class="list-group-item">Posts</a>
+				<a href="<$mt:Var name="script_url"$>?__mode=list_template&amp;blog_id=<$mt:Var name="blog_id"$>" class="list-group-item">Templates</a>
+				<a href="<$mt:Var name="script_url"$>?__mode=rebuild_confirm&amp;blog_id=<$mt:Var name="blog_id"$>" class="list-group-item">Rebuild</a>
+				<a href="<$mt:Var name="blog_url" escape="html"$>" class="list-group-item" target="_blank">View Site <i class="glyphicon glyphicon-new-window"></i></a>
+			</div>
 		</div>
 	</div>
+</mt:Unless>
 </div>
 
-<mt:include name="mtb-include/footer.tmpl">
+<mt:Include name="mtb-include/footer.tmpl">

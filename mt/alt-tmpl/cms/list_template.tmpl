@@ -1,0 +1,54 @@
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
+
+<div class="container">
+<mt:If name="saved_deleted">
+	<div class="mtl-alertbox">
+		<div class="alert alert-success">Template deleted.</div>
+	</div>
+</mt:If>
+	<div class="mtl-header">
+		<h1>Templates</h1>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="btn-group">
+				<a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-plus-sign glyphicon-white"></i> New… <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=template&amp;type=index&amp;blog_id=<$mt:BlogID$>">Index Template</a></li>
+					<li><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=template&amp;type=individual&amp;blog_id=<$mt:BlogID$>">Individual Template</a></li>
+					<li><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=template&amp;type=archive&amp;blog_id=<$mt:BlogID$>">Archive Template</a></li>
+					<li><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=template&amp;type=module&amp;blog_id=<$mt:BlogID$>">Template Module</a></li>
+				</ul>
+			</div>
+		</div>
+		<table class="table table-striped">
+<mt:Loop name="template_type_loop">
+			<thead>
+				<tr>
+					<th colspan="2"><$mt:Var name="template_type_label"$></th>
+				</tr>
+			</thead>
+			<tbody>
+	<mt:Loop name="object_loop">
+				<tr>
+					<td>
+						<a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=template&amp;id=<$mt:Var name="id"$>&amp;blog_id=<$mt:Var name="blog_id"$>"><$mt:Var name="name" escape="html"$></a>
+		<mt:If name="outfile">
+						<small class="muted"><$mt:Var name="outfile" escape="html"$></small>
+		</mt:If>
+					</td>
+					<td>
+		<mt:If name="linked_file">
+						<span class="label label-default">Linked</span>
+		</mt:If>
+					</td>
+				</tr>
+	</mt:Loop>
+			</tbody>
+</mt:Loop>
+		</table>
+	</div>
+</div>
+
+<mt:Include name="mtb-include/footer.tmpl">

@@ -1,98 +1,136 @@
-<mt:include name="mtb-include/config.tmpl">
-<mt:include name="mtb-include/header.tmpl">
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span2">
-			<div class="mtl-nav">
-				<div class="well">
-					<ul class="nav nav-list">
-						<li><a href="<$mt:var name="mt_url"$>">Blogs</a></li>
-						<li class="divider"></li>
-						<li class="nav-header"><$mt:BlogName$></li>
-						<li<mt:if name="new_object"> class="active"</mt:if>><a href="<$mt:var name="mt_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:BlogID$>">New Post</a></li>
-						<li><a href="<$mt:var name="mt_url"$>?__mode=list_entry&amp;blog_id=<$mt:BlogID$>">Posts</a></li>
-						<li><a href="<$mt:var name="mt_url"$>?__mode=rebuild_confirm&amp;blog_id=<$mt:BlogID$>">Rebuild</a></li>
-					</ul>
-				</div>
+<div class="modal fade" id="deleteObjModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<p><strong>Are you sure you want to permanently delete this post?</strong></p>
+				<p>You can’t undo this action.</p>
 			</div>
-		</div>
-		<div class="span10">
-<mt:if name="saved_changes">
-			<div class="mtl-alertbox">
-                <div class="alert alert-success">Saved changes.</div>
-            </div>
-</mt:if>
-			<div class="mtl-header">
-<mt:if name="new_object">
-				<h1>New Post</h1>
-<mt:else>
-				<h1>Edit Post</h1>
-</mt:if>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" id="actionDeleteObj">Delete Post</button>
 			</div>
-			<form method="post" action="<$mt:var name="script_url"$>">
-<mt:if name="new_object">
-    			<input type="hidden" name="author_id" value="<$mt:var name="author_id"$>" />
-<mt:else>
-    			<input type="hidden" name="id" value="<$mt:var name="id"$>" />
-</mt:if>
-				<input type="hidden" name="blog_id" value="<$mt:var name="blog_id"$>" />
-		        <input type="hidden" name="__mode" value="save_entry" />
-		        <input type="hidden" name="_type" value="<$mt:var name="object_type"$>" />
-		        <input type="hidden" name="return_args" value="<$mt:var name="return_args" escape="html"$>" />
-		        <input type="hidden" name="magic_token" value="<$mt:var name="magic_token"$>" />
-		        <input type="hidden" name="convert_breaks" value="markdown_with_smartypants" />
-				<div class="row-fluid">
-					<div class="span9">
-						<div><label>Title</label></div>
-<mt:if name="new_object">
-						<div><input type="text" name="title" autofocus="autofocus" class="span12" /></div>
-<mt:else>
-						<div><input type="text" name="title" value="<$mt:var name="title" escape="html"$>" class="span12" /></div>
-</mt:if>
-						<div><label>Body</label></div>
-<mt:if name="new_object">
-						<div><textarea name="text" rows="20" class="span12"></textarea></div>
-<mt:else>
-						<div><textarea name="text" rows="20" class="span12"><$mt:var name="text" escape="html"$></textarea></div>
-</mt:if>
-					</div>
-					<div class="span3">
-						<div><label>Basename</label></div>
-<mt:if name="new_object">
-						<div><input type="text" name="basename" class="span12" /></div>
-<mt:else>
-						<div><input type="text" name="basename" value="<$mt:var name="basename" escape="html"$>" class="span12" /></div>
-</mt:if>
-						<div><label>Status</label></div>
-						<div>
-							<select name="status" class="span12">
-<mt:if name="new_object">
-								<option value="2">Publish</option>
-								<option value="1">Draft</option>
-<mt:else>
-								<option value="2"<mt:if name="status" eq="2"> selected="selected"</mt:if>>Published</option>
-								<option value="1"<mt:if name="status" eq="1"> selected="selected"</mt:if>>Draft</option>
-</mt:if>
-							</select>
-						</div>
-<mt:unless name="new_object">
-						<div><label>Date &amp; Time</label></div>
-						<div><input type="text" name="authored_on_date" value="<$mt:var name="authored_on_date" escape="html"$>" class="span12" /></div>
-						<div><input type="text" name="authored_on_time" value="<$mt:var name="authored_on_time" escape="html"$>" class="span12" /></div>
-</mt:unless>
-					</div>
-				</div>
-				<div>
-<mt:if name="new_object">
-					<button type="submit" class="btn btn-primary">Create Post</button>
-<mt:else>
-					<button type="submit" class="btn btn-primary">Save Changes</button>
-</mt:if>
-				</div>
-			</form>
 		</div>
 	</div>
 </div>
 
-<mt:include name="mtb-include/footer.tmpl">
+<div class="container">
+<mt:If name="saved_added">
+	<div class="mtl-alertbox">
+		<div class="alert alert-success">Saved changes.</div>
+	</div>
+</mt:If>
+<mt:If name="saved_changes">
+	<div class="mtl-alertbox">
+		<div class="alert alert-success">Saved changes.</div>
+	</div>
+</mt:If>
+	<div class="mtl-header">
+<mt:If name="new_object">
+		<h1>New Post</h1>
+<mt:Else>
+		<h1>Edit Post</h1>
+</mt:If>
+	</div>
+	<form method="post" action="<$mt:Var name="script_url"$>" id="objForm">
+<mt:If name="new_object">
+		<input type="hidden" name="author_id" value="<$mt:Var name="author_id"$>" />
+<mt:Else>
+		<input type="hidden" name="id" value="<$mt:Var name="id"$>" />
+</mt:If>
+		<input type="hidden" name="blog_id" value="<$mt:Var name="blog_id"$>" />
+		<input type="hidden" name="__mode" value="save_entry" />
+		<input type="hidden" name="_type" value="<$mt:Var name="object_type"$>" />
+		<input type="hidden" name="return_args" value="<$mt:Var name="return_args" escape="html"$>" />
+		<input type="hidden" name="magic_token" value="<$mt:Var name="magic_token"$>" />
+		<input type="hidden" name="convert_breaks" value="markdown_with_smartypants" />
+		<div class="row">
+			<div class="col-md-9">
+				<div class="form-group">
+					<label>Title</label>
+<mt:If name="new_object">
+					<input type="text" name="title" autofocus class="form-control" />
+<mt:Else>
+					<input type="text" name="title" value="<$mt:Var name="title" escape="html"$>" class="form-control" />
+</mt:If>
+				</div>
+				<div class="form-group">
+					<label>Body</label>
+<mt:If name="new_object">
+					<textarea name="text" rows="20" class="form-control mtl-mono"></textarea>
+<mt:Else>
+					<textarea name="text" rows="20" class="form-control mtl-mono"><$mt:Var name="text" escape="html"$></textarea>
+</mt:If>
+				</div>
+			</div>
+			<div class="col-md-3">
+				<div class="form-group">
+					<label>Basename</label>
+<mt:If name="new_object">
+					<input type="text" name="basename" class="form-control" />
+<mt:Else>
+					<input type="text" name="basename" value="<$mt:Var name="basename" escape="html"$>" class="form-control" />
+</mt:If>
+				</div>
+				<div class="form-group">
+					<label>Status</label>
+					<select name="status" class="form-control">
+<mt:If name="new_object">
+						<option value="2">Publish</option>
+						<option value="1">Draft</option>
+<mt:Else>
+						<option value="2"<mt:If name="status" eq="2"> selected="selected"</mt:If>>Published</option>
+						<option value="1"<mt:If name="status" eq="1"> selected="selected"</mt:If>>Draft</option>
+</mt:If>
+					</select>
+				</div>
+<mt:Unless name="new_object">
+				<div class="form-group">
+					<label>Date &amp; Time</label>
+					<input type="text" name="authored_on_date" value="<$mt:Var name="authored_on_date" escape="html"$>" class="form-control" />
+					<input type="text" name="authored_on_time" value="<$mt:Var name="authored_on_time" escape="html"$>" class="form-control" />
+				</div>
+</mt:Unless>
+			</div>
+		</div>
+		<div class="mtl-section">
+			<div class="btn-toolbar">
+<mt:If name="new_object">
+				<div class="btn-group">
+					<button type="submit" class="btn btn-primary">Create Post</button>
+				</div>
+<mt:Else>
+				<div class="btn-group">
+					<button type="submit" class="btn btn-primary">Save Changes</button>
+				</div>
+				<div class="btn-group">
+					<a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<i class="glyphicon glyphicon-cog"></i>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="<$mt:Var name="entry_permalink"$>" target="_blank">Open Post in New Window</a></li>
+						<li class="divider"></li>
+						<li><a href="#" data-toggle="modal" data-target="#deleteObjModal">Delete Post…</a></li>
+					</ul>
+				</div>
+</mt:If>
+			</div>
+		</div>
+	</form>
+<mt:Unless name="new_object">
+	<hr />
+	<ul class="pager">
+		<li class="previous<mt:Unless name="previous_entry_id"> disabled</mt:Unless>">
+			<a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;id=<$mt:Var name="previous_entry_id"$>&amp;blog_id=<$mt:Var name="blog_id"$>">&larr; Previous</a>
+		</li>
+		<li class="next<mt:Unless name="next_entry_id"> disabled</mt:Unless>">
+			<a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;id=<$mt:Var name="next_entry_id"$>&amp;blog_id=<$mt:Var name="blog_id"$>">Next &rarr;</a>
+		</li>
+	</ul>
+</mt:Unless>
+</div>
+
+<mt:Include name="mtb-include/footer.tmpl">

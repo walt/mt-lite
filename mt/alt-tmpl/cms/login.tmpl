@@ -1,0 +1,50 @@
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
+
+<mt:Unless name="logged_out">
+	<mt:If name="login_again">
+<div class="alert alert-success">
+	Your Movable Type session has ended. Please sign in again to continue this action.
+</div>
+	<mt:Else>
+		<mt:If name="error">
+<div class="alert alert-error">
+	<$mt:Var name="error"$>
+</div>
+		</mt:If>
+	</mt:If>
+</mt:Unless>
+
+<div class="mtl-login">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<form method="post" action="<$mt:Var name="script_url"$>">
+<mt:Loop name="query_params">
+					<input type="hidden" name="<$mt:Var name="name" escape="html"$>" value="<$mt:Var name="value" escape="html"$>" />
+</mt:Loop>
+<mt:Unless name="delegate_auth">
+					<input type="hidden" name="remember" value="1" />
+					<div class="mtl-header">
+						<h1><$mt:Var name="app_name"$></h1>
+					</div>
+					<div class="form-group">
+						<input type="text" name="username" autofocus placeholder="Username" autocapitalize="none" class="form-control" />
+					</div>
+					<div class="form-group">
+						<input type="password" name="password" placeholder="Password" class="form-control" />
+					</div>
+					<div class="form-group">
+						<button type="submit" class="btn btn-primary">Sign In</button>
+	<mt:If name="can_recover_password">
+						<a href="<mt:Var name="script_url">?__mode=start_recover" class="btn btn-link pull-right"><span class="muted">Forgot password?</span></a>
+	</mt:If>
+					</div>
+</mt:Unless>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+<mt:Include name="mtb-include/footer.tmpl">

@@ -1,0 +1,42 @@
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
+
+<div class="container">
+	<div class="mtl-alertbox">
+		<div class="alert alert-success">
+<mt:If name="all">
+			The blog has been published.
+<mt:Else>
+	<mt:If name="is_one_index">
+			The template has been published.
+	<mt:Else>
+		<mt:If name="is_entry">
+			The posts have been published.
+		<mt:Else>
+			<mt:If name="archives">
+			The archives have been published.
+			<mt:Else>
+			The templates have been published.
+			</mt:If>
+		</mt:If>
+	</mt:If>
+</mt:If>
+<mt:If name="start_timestamp">
+			(Elapsed time: <$mt:Date ts="$start_timestamp" relative="3"$>)
+</mt:If>
+		</div>
+	</div>
+	<div class="mtl-header">
+		<h1>Rebuild</h1>
+	</div>
+	<hr />
+	<div>
+		<a href="<$mt:Var name="blog_url" escape="html"$>" target="_blank" class="btn btn-default">View Site</a>
+<mt:If name="is_one_index">
+		<a href="<$mt:Var name="tmpl_url"$>" target="_blank" class="btn btn-default">View Page</a>
+</mt:If>
+		<a href="<$mt:Var name="script_url"$>?__mode=rebuild_confirm&amp;blog_id=<$mt:BlogID$>" class="btn btn-default">Rebuild Again</a>
+	</div>
+</div>
+
+<mt:Include name="mtb-include/footer.tmpl">

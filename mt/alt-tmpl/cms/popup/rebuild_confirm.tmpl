@@ -1,52 +1,61 @@
-<mt:include name="mtb-include/config.tmpl">
-<mt:include name="mtb-include/header.tmpl">
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
 
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span2">
-			<div class="mtl-nav">
-				<div class="well">
-					<ul class="nav nav-list">
-						<li><a href="<$mt:var name="mt_url"$>">Blogs</a></li>
-						<li class="divider"></li>
-						<li class="nav-header"><$mt:BlogName$></li>
-						<li><a href="<$mt:var name="mt_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:BlogID$>">New Post</a></li>
-						<li><a href="<$mt:var name="mt_url"$>?__mode=list_entry&amp;blog_id=<$mt:BlogID$>">Posts</a></li>
-						<li class="active"><a href="<$mt:var name="mt_url"$>?__mode=rebuild_confirm&amp;blog_id=<$mt:BlogID$>">Rebuild</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="span10">
-			<div class="mtl-header">
-				<h1>Rebuild</h1>
-			</div>
-			<form method="post" action="<$mt:var name="script_url"$>">
-				<input type="hidden" name="__mode" value="start_rebuild" />
-				<input type="hidden" name="blog_id" value="<$mt:var name="blog_id" escape="html"$>" />
-				<input type="hidden" name="next" value="<$mt:var name="build_next" escape="html"$>" />
-				<input type="hidden" name="total_entries" value="<$mt:var name="total_entries" escape="html"$>" />
-				<input type="hidden" name="total_pages" value="<$mt:var name="total_pages" escape="html"$>" />
-				<input type="hidden" name="total_cats" value="<$mt:var name="total_cats" escape="html"$>" />
-				<div>
-				    <select name="type">
-				        <option value="<$mt:var name="build_order"$>" selected="selected">All Files</option>
-<mt:if name="index_tmpl_id">
-				        <option value="index-<$mt:var name="index_tmpl_id"$>" selected="selected">Index Template: <$mt:var name="index_tmpl_name" escape="html"$></option>
-</mt:if>
-			    	    <option value="index"<mt:if name="index_selected"> selected="selected"</mt:if>>Only Indexes</option>
-<mt:loop name="archive_type_loop">
-			        	<option value="<$mt:var name="archive_type"$>">Only <$mt:var name="archive_type_label" escape="html"$> Archives</option>
-</mt:loop>
-<mt:loop name="rebuild_option_loop">
-				        <option value="<$mt:var name="key"$>"><$mt:var name="label" escape="html"$></option>
-</mt:loop>
-			    	</select>
-				</div>
-			    <div><button type="submit" class="btn btn-primary">Rebuild</button></div>
-			</form>
-		</div>
+<div class="container">
+	<div class="mtl-header">
+		<h1>Rebuild</h1>
 	</div>
+	<form method="post" action="<$mt:Var name="script_url"$>">
+		<input type="hidden" name="__mode" value="start_rebuild" />
+		<input type="hidden" name="blog_id" value="<$mt:Var name="blog_id" escape="html"$>" />
+		<input type="hidden" name="next" value="<$mt:Var name="build_next" escape="html"$>" />
+		<input type="hidden" name="total_entries" value="<$mt:Var name="total_entries" escape="html"$>" />
+		<input type="hidden" name="total_pages" value="<$mt:Var name="total_pages" escape="html"$>" />
+		<input type="hidden" name="total_cats" value="<$mt:Var name="total_cats" escape="html"$>" />
+		<hr />
+		<div>
+			<div class="radio">
+				<label>
+					<input type="radio" name="type" value="<$mt:Var name="build_order"$>" checked>
+					All Files
+				</label>
+			</div>
+<mt:If name="index_tmpl_id">
+			<div class="radio">
+				<label>
+					<input type="radio" name="type" value="index-<$mt:Var name="index_tmpl_id"$>" checked>
+					Index Template: <$mt:Var name="index_tmpl_name" escape="html"$>
+				</label>
+			</div>
+</mt:If>
+			<div class="radio">
+				<label>
+					<input type="radio" name="type" value="index"<mt:If name="index_selected"> checked</mt:If>>
+					Only Indexes
+				</label>
+			</div>
+<mt:Loop name="archive_type_loop">
+			<div class="radio">
+				<label>
+					<input type="radio" name="type" value="<$mt:Var name="archive_type"$>">
+					Only <$mt:Var name="archive_type_label" escape="html"$> Archives
+				</label>
+			</div>
+</mt:Loop>
+<mt:Loop name="rebuild_option_loop">
+			<div class="radio">
+				<label>
+					<input type="radio" name="type" value="<$mt:Var name="key"$>">
+					<$mt:Var name="label" escape="html"$>
+				</label>
+			</div>
+</mt:Loop>
+		</div>
+		<hr />
+		<div>
+			<button type="submit" class="btn btn-primary">Rebuild</button>
+		</div>
+	</form>
 </div>
 
-<mt:include name="mtb-include/footer.tmpl">
+<mt:Include name="mtb-include/footer.tmpl">

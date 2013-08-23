@@ -1,7 +1,9 @@
-mt-lite
+MT/Lite
 =======
 
-A handful of app templates for Movable Type which leverage Bootstrap to create a _very_ light interface.
+Movable Type + Bootstrap + jQuery + Google Charts
+
+![Screenshot of the post editor view.](https://dl.dropboxusercontent.com/u/2175068/mt-lite/edit_post.png)
 
 
 Installation

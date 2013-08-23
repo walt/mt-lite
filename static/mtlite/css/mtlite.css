@@ -1,20 +1,121 @@
-.mtl-nav {
-    padding-top: 20px;
-}
-
-.mtl-nav .well {
-     padding: 8px 0;
-}
+/* Alertbox */
 
 .mtl-alertbox {
-    padding-top: 20px;
+	padding-top: 20px;
 }
+
+
+/* Badge */
+
+.mtl-badge {
+	padding-top: 14px;
+	padding-bottom: 14px;
+	text-align: center;
+}
+
+.mtl-badge img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+
+/* Footer */
+
+html, body {
+	height: 100%;
+}
+
+#wrap {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	margin: 0 auto -51px;
+	padding: 0 0 51px;
+}
+
+#footer {
+	border-top: 1px solid #e7e7e7;
+	background-color: #f8f8f8;
+}
+
+
+/* Glyphicon */
+
+.glyphicon {
+	top: 0;
+}
+
+
+/* Header */
 
 .mtl-header {
-    padding-bottom: 10px;
-    padding-top: 10px;
+	margin-bottom: 20px;
 }
 
-.mtl-alertbox + .mtl-header {
-    padding-top: 0;
+.mtl-header h1 {
+	margin-top: 0;
+}
+
+
+/* Listlink */
+
+.mtl-listlink {
+	display: inline-block;
+	margin-top: 7px;
+	margin-bottom: 7px;
+}
+
+
+/* Login */
+
+.mtl-login {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	height: 188px;
+	margin: auto;
+}
+
+.mtl-login .mtl-header {
+	margin-bottom: 15px;
+}
+
+.mtl-login h1 {
+	font-size: 24px;
+}
+
+
+/* Mono */
+
+.mtl-mono {
+	font-family: monospace;
+}
+
+
+/* Section */
+
+.mtl-section {
+	margin-bottom: 20px;
+}
+
+
+/* Stats */
+
+.mtl-stats h5 {
+	margin-top: 0;
+	margin-bottom: 15px;
+}
+
+.mtl-stats p {
+	display: none;
+	margin-top: 15px;
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.mtl-stats a {
+	display: none;
 }

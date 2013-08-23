@@ -1,19 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title><$mt:var name="app_name"$></title>
-    <link rel="stylesheet" href="<$mt:var name="path_to_bootstrap"$>css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<$mt:var name="path_to_extras"$>css/mtlite.css" />
+	<meta charset="utf-8" />
+	<title><$mt:Var name="app_name"$></title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<link rel="stylesheet" href="<$mt:Var name="path_to_bootstrap"$>css/bootstrap.min.css" />
+	<link rel="stylesheet" href="<$mt:Var name="path_to_extras"$>css/mtlite.css" />
+<$mt:Var name="js_header_extras"$>
 </head>
 <body>
-	<div class="navbar navbar-static-top">
-		<div class="navbar-inner">
-			<div class="container-fluid">
-				<a class="brand" href="<$mt:var name="mt_url"$>"><$mt:var name="app_name"$></a>
-				<ul class="nav pull-right">
-					<li><a><$mt:var name="author_name"$></a></li>
+<mt:If name="author_name">
+<div id="wrap">
+	<div class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+					<span class="sr-only">Toggle Navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="<$mt:Var name="script_url"$>"><$mt:Var name="app_name"$></a>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Blogs <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+	<mt:Blogs>
+		<$mt:BlogID setvar="loop_blog_id"$>
+							<li<mt:If name="loop_blog_id" eq="$blog_id"> class="active"</mt:If>><a href="<$mt:Var name="script_url"$>?__mode=dashboard&amp;blog_id=<$mt:BlogID$>"><$mt:BlogName$></a></li>
+	</mt:Blogs>
+						</ul>
+					</li>
+				</ul>
+				<a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:Var name="blog_id"$>" class="btn btn-default navbar-btn navbar-left<mt:Unless name="blog_id"> disabled</mt:Unless>">New Post</a>
+				<ul class="nav navbar-nav">
+					<li<mt:Unless name="blog_id"> class="disabled"</mt:Unless>><a href="<$mt:Var name="script_url"$>?__mode=list_entry&amp;blog_id=<$mt:Var name="blog_id"$>">Posts</a></li>
+					<li<mt:Unless name="blog_id"> class="disabled"</mt:Unless>><a href="<$mt:Var name="script_url"$>?__mode=list_template&amp;blog_id=<$mt:Var name="blog_id"$>">Templates</a></li>
+					<li<mt:Unless name="blog_id"> class="disabled"</mt:Unless>><a href="<$mt:Var name="script_url"$>?__mode=rebuild_confirm&amp;blog_id=<$mt:Var name="blog_id"$>">Rebuild</a></li>
+					<li<mt:Unless name="blog_id"> class="disabled"</mt:Unless>><a href="<$mt:Var name="blog_url" escape="html"$>" target="_blank">View Site <i class="glyphicon glyphicon-new-window"></i></a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <b class="caret"></b></a>
+						<ul class="dropdown-menu">
+							<li class="dropdown-header">Signed in as…</li>
+							<li class="disabled"><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=author&amp;id=<$mt:Var name="author_id"$>"><$mt:Var name="author_name"$></a></li>
+	<mt:If name="can_logout">
+							<li class="divider"></li>
+							<li><a href="<$mt:Var name="mt_url"$>?__mode=logout">Sign Out</a></li>
+	</mt:If>
+						</ul>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
+</mt:If>

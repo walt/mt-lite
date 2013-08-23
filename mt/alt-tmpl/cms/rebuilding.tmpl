@@ -1,0 +1,73 @@
+<mt:SetVarBlock name="js_header_extras" append="1">
+<script>
+setTimeout( function() {
+<mt:If name="redirect_target">
+	window.location = '<$mt:Var name="redirect_target"$>';
+<mt:Else>
+	window.location = '<$mt:Var name="script_url"$>?__mode=rebuild&blog_id=<$mt:Var name="blog_id" escape="url"$>&type=<$mt:Var name="build_type" escape="url"$>&next=<$mt:Var name="build_next" escape="url"$>&offset=<$mt:Var name="offset" escape="url"$>&limit=<$mt:Var name="limit" escape="url"$>&total=<$mt:Var name="total" escape="url"$>&start_time=<$mt:Var name="start_time" escape="url"$>&entry_id=<$mt:Var name="entry_id" escape="url"$>&is_new=<$mt:Var name="is_new" escape="url"$>&old_status=<$mt:Var name="old_status" escape="url"$>&old_previous=<$mt:Var name="old_previous" escape="url"$>&old_next=<$mt:Var name="old_next" escape="url"$><mt:If name="is_full_screen">&fs=1</mt:If><mt:If name="with_indexes">&with_indexes=1</mt:If><mt:If name="no_static">&no_static=1</mt:If><mt:If name="template_id">&template_id=<$mt:Var name="template_id" escape="url"$></mt:If><mt:If name="templatemap_id">&templatemap_id=<$mt:Var name="templatemap_id" escape="url"$></mt:If><mt:If name="return_args">&return_args=<$mt:Var name="return_args" escape="url"$></mt:If>';
+</mt:If>
+}, 5000 );
+</script>
+</mt:setvarblock>
+
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 col-md-offset-4">
+<mt:If name="is_one_index">
+			<div class="mtl-alertbox">
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$>…</div>
+			</div>
+<mt:Else>
+	<mt:If name="is_individual">
+			<div class="mtl-alertbox">
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> <$mt:Var name="indiv_range" escape="html"$>…</div>
+			</div>
+	<mt:Else>
+		<mt:If name="is_entry">
+			<mt:If name="dynamic">
+			<div class="mtl-alertbox">
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> dynamic links…</div>
+			</div>
+			<mt:Else>
+			<div class="mtl-alertbox">
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$>…</div>
+			</div>
+			</mt:If>
+		<mt:Else>
+			<mt:If name="dynamic">
+			<div class="mtl-alertbox">
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> dynamic links…</div>
+			</div>
+			<mt:Else>
+				<mt:If name="build_type_name">
+					<mt:If name="archives">
+			<div class="mtl-alertbox">
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> archives…</div>
+			</div>
+					<mt:Else>
+			<div class="mtl-alertbox">
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> templates…</div>
+			</div>
+					</mt:If>
+				<mt:Else>
+			<div class="mtl-alertbox">
+				<div class="alert alert-info">Publishing…</div>
+			</div>
+				</mt:If>
+			</mt:If>
+		</mt:If>
+	</mt:If>
+</mt:If>
+<mt:If name="total">
+			<div class="progress progress-striped active">
+				<div class="progress-bar" style="width: <$mt:Var name="complete"$>%;"></div>
+			</div>
+</mt:If>
+		</div>
+	</div>
+</div>
+
+<mt:Include name="mtb-include/footer.tmpl">
