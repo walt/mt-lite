@@ -2,29 +2,27 @@
 <mt:Include name="mtb-include/header.tmpl">
 
 <div class="container">
-	<div class="mtl-alertbox">
-		<div class="alert alert-success">
+	<div class="alert alert-success">
 <mt:If name="all">
-			The blog has been published.
+		The blog has been published.
 <mt:Else>
 	<mt:If name="is_one_index">
-			The template has been published.
+		The template has been published.
 	<mt:Else>
 		<mt:If name="is_entry">
-			The posts have been published.
+		The posts have been published.
 		<mt:Else>
 			<mt:If name="archives">
-			The archives have been published.
+		The archives have been published.
 			<mt:Else>
-			The templates have been published.
+		The templates have been published.
 			</mt:If>
 		</mt:If>
 	</mt:If>
 </mt:If>
 <mt:If name="start_timestamp">
-			(Elapsed time: <$mt:Date ts="$start_timestamp" relative="3"$>)
+		(Elapsed time: <$mt:Date ts="$start_timestamp" relative="3"$>)
 </mt:If>
-		</div>
 	</div>
 	<div class="mtl-header">
 		<h1>Rebuild</h1>

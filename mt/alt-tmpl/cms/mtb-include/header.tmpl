@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title><$mt:Var name="app_name"$></title>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 	<link rel="stylesheet" href="<$mt:Var name="path_to_bootstrap"$>css/bootstrap.min.css" />
 	<link rel="stylesheet" href="<$mt:Var name="path_to_extras"$>css/mtlite.css" />
 <$mt:Var name="js_header_extras"$>
@@ -42,6 +42,7 @@
 					<li<mt:Unless name="blog_id"> class="disabled"</mt:Unless>><a href="<$mt:Var name="blog_url" escape="html"$>" target="_blank">View Site <i class="glyphicon glyphicon-new-window"></i></a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
+					<li<mt:Unless name="blog_id"> class="disabled"</mt:Unless>><a href="<$mt:Var name="script_url"$>?__mode=search_replace&amp;blog_id=<$mt:Var name="blog_id"$>"><i class="glyphicon glyphicon-search"></i></a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-user"></i> <b class="caret"></b></a>
 						<ul class="dropdown-menu">

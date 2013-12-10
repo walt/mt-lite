@@ -1,22 +1,19 @@
-/* Alertbox */
-
-.mtl-alertbox {
-	padding-top: 20px;
-}
-
-
 /* Badge */
 
 .mtl-badge {
-	padding-top: 14px;
-	padding-bottom: 14px;
-	text-align: center;
+	height: 40px;
+	background-image: url(../img/powered.png);
+	background-repeat: no-repeat;
+	background-position: 50% 50%;
 }
 
-.mtl-badge img {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+
+.mtl-badge {
+	background-image: url(../img/powered@2x.png);
+	background-size: 128px 22px;
+}
+
 }
 
 
@@ -30,8 +27,8 @@ html, body {
 	min-height: 100%;
 	height: auto !important;
 	height: 100%;
-	margin: 0 auto -51px;
-	padding: 0 0 51px;
+	margin: 0 auto -41px;
+	padding: 0 0 41px;
 }
 
 #footer {

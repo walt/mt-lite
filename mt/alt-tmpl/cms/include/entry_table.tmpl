@@ -1,0 +1,21 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Title</th>
+			<th>Date</th>
+			<th>Status</th>
+		</tr>
+	</thead>
+	<tbody>
+<mt:Loop name="object_loop">
+		<tr>
+			<td><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;id=<$mt:Var name="id"$>&amp;blog_id=<$mt:Var name="blog_id"$>"><$mt:Var name="title" escape="html"$></a></td>
+			<td><$mt:Date ts="$authored_on" relative="1"$></td>
+			<td>
+				<mt:If name="status" eq="2"$><span class="label label-default">Published</span></mt:If>
+				<mt:If name="status" eq="1"$><span class="label label-warning">Draft</span></mt:If>
+			</td>
+		</tr>
+</mt:Loop>
+	</tbody>
+</table>

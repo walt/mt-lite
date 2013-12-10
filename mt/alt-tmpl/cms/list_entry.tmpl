@@ -3,9 +3,7 @@
 
 <div class="container">
 <mt:If name="saved_deleted">
-	<div class="mtl-alertbox">
-		<div class="alert alert-success">Post deleted.</div>
-	</div>
+	<div class="alert alert-success">Post deleted.</div>
 </mt:If>
 	<div class="mtl-header">
 		<h1>Posts</h1>
@@ -14,27 +12,7 @@
 		<div class="panel-heading">
 			<a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;blog_id=<$mt:BlogID$>" class="btn btn-success"><i class="glyphicon glyphicon-plus-sign glyphicon-white"></i> New Post</a>
 		</div>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Title</th>
-					<th>Date</th>
-					<th>Status</th>
-				</tr>
-			</thead>
-			<tbody>
-<mt:Loop name="object_loop">
-				<tr>
-					<td><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=entry&amp;id=<$mt:Var name="id"$>&amp;blog_id=<$mt:Var name="blog_id"$>"><$mt:Var name="title" escape="html"$></a></td>
-					<td><$mt:Date ts="$authored_on" relative="1"$></td>
-					<td>
-						<mt:If name="status" eq="2"$><span class="label label-default">Published</span></mt:If>
-						<mt:If name="status" eq="1"$><span class="label label-warning">Draft</span></mt:If>
-					</td>
-				</tr>
-</mt:Loop>
-			</tbody>
-		</table>
+<mt:Include name="include/entry_table.tmpl">
 	</div>
 	<ul class="pager">
 		<li class="previous<mt:Unless name="prev_offset"> disabled</mt:Unless>">

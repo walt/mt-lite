@@ -1,0 +1,29 @@
+<mt:Include name="mtb-include/config.tmpl">
+<mt:Include name="mtb-include/header.tmpl">
+
+<div class="container">
+	<div class="mtl-header">
+		<h1>Search</h1>
+	</div>
+	<form method="get" action="<$mt:Var name="script_url"$>">
+		<input type="hidden" name="__mode" value="search_replace" />
+		<input type="hidden" name="_type" value="<$mt:Var name="object_type"$>" />
+<mt:If name="blog_id">
+		<input type="hidden" name="blog_id" value="<$mt:Var name="blog_id"$>" />
+</mt:If>
+		<input type="hidden" name="do_search" value="1" />
+		<input type="hidden" name="magic_token" value="<$mt:Var name="magic_token"$>" />
+		<div class="mtl-section">
+			<div class="form-group">
+				<input type="search" name="search" value="<mt:var name="search" escape="html">" autofocus class="form-control" />
+			</div>
+		</div>
+	</form>
+<mt:If name="have_results">
+	<div class="panel panel-default">
+	<mt:If name="searched" id="search_results"></mt:If>
+	</div>
+</mt:If>
+</div>
+
+<mt:Include name="mtb-include/footer.tmpl">
