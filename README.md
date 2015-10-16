@@ -3,7 +3,7 @@ MT/Lite
 
 Movable Type + Bootstrap + jQuery + Google Charts
 
-![Screenshot of the post editor view.](https://dl.dropboxusercontent.com/u/2175068/mt-lite/edit_post.png)
+![Screenshot of the post editor view.](https://www.dropbox.com/s/abv1lmfpwfxaw7n/edit_post.png?raw=1)
 
 
 Installation
