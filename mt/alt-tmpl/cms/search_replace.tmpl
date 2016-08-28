@@ -16,7 +16,12 @@
 		<input type="hidden" name="magic_token" value="<$mt:Var name="magic_token"$>" />
 		<div class="mtl-section">
 			<div class="form-group">
-				<input type="search" name="search" value="<mt:var name="search" escape="html">" autofocus class="form-control" />
+				<div class="input-group">
+					<input type="search" name="search" value="<mt:var name="search" escape="html">" autofocus class="form-control" />
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-primary">Search</button>
+					</span>
+				</div>
 			</div>
 		</div>
 	</form>
