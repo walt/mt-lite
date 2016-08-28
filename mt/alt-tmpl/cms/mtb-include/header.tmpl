@@ -9,7 +9,8 @@
 <$mt:Var name="js_header_extras"$>
 </head>
 <body>
-<mt:If name="author_name">
+<mt:Unless name="no_chrome">
+	<mt:If name="author_name">
 <div id="wrap">
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container">
@@ -27,10 +28,10 @@
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">Blogs <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-	<mt:Blogs>
-		<$mt:BlogID setvar="loop_blog_id"$>
+		<mt:Blogs>
+			<$mt:BlogID setvar="loop_blog_id"$>
 							<li<mt:If name="loop_blog_id" eq="$blog_id"> class="active"</mt:If>><a href="<$mt:Var name="script_url"$>?__mode=dashboard&amp;blog_id=<$mt:BlogID$>"><$mt:BlogName$></a></li>
-	</mt:Blogs>
+		</mt:Blogs>
 						</ul>
 					</li>
 				</ul>
@@ -48,14 +49,15 @@
 						<ul class="dropdown-menu">
 							<li class="dropdown-header">Signed in as…</li>
 							<li class="disabled"><a href="<$mt:Var name="script_url"$>?__mode=view&amp;_type=author&amp;id=<$mt:Var name="author_id"$>"><$mt:Var name="author_name"$></a></li>
-	<mt:If name="can_logout">
+		<mt:If name="can_logout">
 							<li class="divider"></li>
 							<li><a href="<$mt:Var name="mt_url"$>?__mode=logout">Sign Out</a></li>
-	</mt:If>
+		</mt:If>
 						</ul>
 					</li>
 				</ul>
 			</div>
 		</div>
 	</div>
-</mt:If>
+	</mt:If>
+</mt:Unless>

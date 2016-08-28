@@ -11,46 +11,48 @@ setTimeout( function() {
 </script>
 </mt:setvarblock>
 
+<$mt:Var name="no_chrome" value="1"$>
+
 <mt:Include name="mtb-include/config.tmpl">
 <mt:Include name="mtb-include/header.tmpl">
 
-<div class="container">
-	<div class="row">
-		<div class="col-md-4 col-md-offset-4">
+<div class="mtl-rebuild">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
 <mt:If name="is_one_index">
-			<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$>…</div>
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$>…</div>
 <mt:Else>
 	<mt:If name="is_individual">
-			<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> <$mt:Var name="indiv_range" escape="html"$>…</div>
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> <$mt:Var name="indiv_range" escape="html"$>…</div>
 	<mt:Else>
 		<mt:If name="is_entry">
 			<mt:If name="dynamic">
-			<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> dynamic links…</div>
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> dynamic links…</div>
 			<mt:Else>
-			<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$>…</div>
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$>…</div>
 			</mt:If>
 		<mt:Else>
 			<mt:If name="dynamic">
-			<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> dynamic links…</div>
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> dynamic links…</div>
 			<mt:Else>
 				<mt:If name="build_type_name">
 					<mt:If name="archives">
-			<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> archives…</div>
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> archives…</div>
 					<mt:Else>
-			<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> templates…</div>
+				<div class="alert alert-info">Publishing <$mt:Var name="build_type_name" escape="html"$> templates…</div>
 					</mt:If>
 				<mt:Else>
-			<div class="alert alert-info">Publishing…</div>
+				<div class="alert alert-info">Publishing…</div>
 				</mt:If>
 			</mt:If>
 		</mt:If>
 	</mt:If>
 </mt:If>
-<mt:If name="total">
-			<div class="progress progress-striped active">
-				<div class="progress-bar" style="width: <$mt:Var name="complete"$>%;"></div>
+				<div class="progress progress-striped active">
+					<div class="progress-bar" style="width: <mt:If name="total"><$mt:Var name="complete"$><mt:Else>100</mt:If>%;"></div>
+				</div>
 			</div>
-</mt:If>
 		</div>
 	</div>
 </div>

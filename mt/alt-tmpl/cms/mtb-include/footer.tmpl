@@ -1,11 +1,13 @@
-<mt:If name="author_name">
+<mt:Unless name="no_chrome">
+	<mt:If name="author_name">
 </div>
 <div id="footer">
 	<div class="container">
 		<div class="mtl-badge"></div>
 	</div>
 </div>
-</mt:If>
+	</mt:If>
+</mt:Unless>
 <script src="<$mt:Var name="path_to_jquery"$>"></script>
 <script src="<$mt:Var name="path_to_bootstrap"$>js/bootstrap.min.js"></script>
 <script src="//www.google.com/jsapi"></script>
