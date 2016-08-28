@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title><$mt:Var name="app_name"$></title>
+	<title><mt:If name="page_name"><$mt:Var name="page_name"$> - </mt:If><$mt:Var name="app_name"$></title>
 	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
 	<link rel="stylesheet" href="<$mt:Var name="path_to_bootstrap"$>css/bootstrap.min.css" />
 	<link rel="stylesheet" href="<$mt:Var name="path_to_extras"$>css/mtlite.css" />

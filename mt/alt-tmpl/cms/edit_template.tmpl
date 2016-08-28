@@ -1,3 +1,4 @@
+<$mt:Var name="page_name" value="Edit Template"$>
 <mt:Include name="mtb-include/config.tmpl">
 <mt:Include name="mtb-include/header.tmpl">
 
@@ -21,7 +22,7 @@
 	<div class="alert alert-success">Saved changes.</div>
 </mt:If>
 	<div class="mtl-header">
-		<h1>Edit Template</h1>
+		<h1><$mt:Var name="page_name" escape="html"$></h1>
 	</div>
 	<form method="post" action="<$mt:Var name="script_url"$>" id="objForm">
 		<input type="hidden" name="id" value="<$mt:Var name="id" escape="html"$>" />

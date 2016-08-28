@@ -1,3 +1,4 @@
+<$mt:Var name="page_name" value="Templates"$>
 <mt:Include name="mtb-include/config.tmpl">
 <mt:Include name="mtb-include/header.tmpl">
 
@@ -6,7 +7,7 @@
 	<div class="alert alert-success">Template deleted.</div>
 </mt:If>
 	<div class="mtl-header">
-		<h1>Templates</h1>
+		<h1><$mt:Var name="page_name" escape="html"$></h1>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">

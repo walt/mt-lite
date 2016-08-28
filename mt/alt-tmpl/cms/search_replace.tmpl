@@ -1,9 +1,10 @@
+<$mt:Var name="page_name" value="Search"$>
 <mt:Include name="mtb-include/config.tmpl">
 <mt:Include name="mtb-include/header.tmpl">
 
 <div class="container">
 	<div class="mtl-header">
-		<h1>Search</h1>
+		<h1><$mt:Var name="page_name" escape="html"$></h1>
 	</div>
 	<form method="get" action="<$mt:Var name="script_url"$>">
 		<input type="hidden" name="__mode" value="search_replace" />

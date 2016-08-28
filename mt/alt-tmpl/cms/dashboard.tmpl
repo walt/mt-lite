@@ -1,13 +1,14 @@
+<mt:Unless name="blog_name">
+<$mt:Var name="page_name" value="Blogs"$>
+<mt:Else>
+<$mt:Var name="page_name" value="$blog_name"$>
+</mt:Unless>
 <mt:Include name="mtb-include/config.tmpl">
 <mt:Include name="mtb-include/header.tmpl">
 
 <div class="container">
 	<div class="mtl-header">
-<mt:Unless name="blog_name">
-		<h1>Blogs</h1>
-<mt:Else>
-		<h1><$mt:Var name="blog_name"$></h1>
-</mt:Unless>
+		<h1><$mt:Var name="page_name" escape="html"$></h1>
 	</div>
 <mt:Unless name="blog_name">
 	<div class="list-group">

@@ -1,3 +1,8 @@
+<mt:If name="new_object">
+<$mt:Var name="page_name" value="New Post"$>
+<mt:Else>
+<$mt:Var name="page_name" value="Edit Post"$>
+</mt:If>
 <mt:Include name="mtb-include/config.tmpl">
 <mt:Include name="mtb-include/header.tmpl">
 
@@ -24,11 +29,7 @@
 	<div class="alert alert-success">Saved changes.</div>
 </mt:If>
 	<div class="mtl-header">
-<mt:If name="new_object">
-		<h1>New Post</h1>
-<mt:Else>
-		<h1>Edit Post</h1>
-</mt:If>
+		<h1><$mt:Var name="page_name" escape="html"$></h1>
 	</div>
 	<form method="post" action="<$mt:Var name="script_url"$>" id="objForm">
 <mt:If name="new_object">
