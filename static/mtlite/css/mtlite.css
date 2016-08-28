@@ -37,6 +37,15 @@ html, body {
 }
 
 
+/* Checklist */
+
+.mtl-checklist {
+	max-height: 100px;
+	margin: -10px 0;
+	overflow-y: scroll;
+}
+
+
 /* Header */
 
 .mtl-header {

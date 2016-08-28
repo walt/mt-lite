@@ -21,6 +21,25 @@
 	</div>
 </div>
 
+<div class="modal fade" id="createCategoryModal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-body">
+				<form method="post" action="<$mt:Var name="script_url"$>" id="createCategoryForm">
+					<div class="form-group">
+						<label>Category Label</label>
+						<input type="text" name="label" class="form-control" />
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-primary" id="actionCreateCategory" disabled>Create Category</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="container">
 <mt:If name="saved_added">
 	<div class="alert alert-success">Saved changes.</div>
@@ -90,6 +109,53 @@
 					<input type="text" name="authored_on_time" value="<$mt:Var name="authored_on_time" escape="html"$>" class="form-control" />
 				</div>
 </mt:Unless>
+				<div class="form-group">
+					<label>Categories</label>
+					<input type="hidden" name="category_ids" value="<$mt:Var name="selected_category_loop" glue=","$>" />
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="mtl-checklist" id="categoryChooser">
+<mt:Loop name="category_tree">
+	<$mt:Var name="checked" value="0"$>
+	<mt:Loop name="selected_category_loop">
+		<mt:If name="id" eq="$__value__">
+			<$mt:Var name="checked" value="1"$>
+		</mt:If>
+	</mt:Loop>
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" name="add_category_id_<$mt:Var name="id" escape="html"$>" data-id="<$mt:Var name="id" escape="html"$>"<mt:If name="checked"> checked</mt:If> />
+										<$mt:Var name="label" escape="html"$>
+									</label>
+								</div>
+</mt:Loop>
+							</div>
+						</div>
+						<div class="panel-footer">
+							<div class="btn-toolbar">
+								<div class="btn-group">
+									<a href="#" class="btn btn-default btn-xs" data-toggle="modal" data-target="#createCategoryModal">
+										<span class="glyphicon glyphicon-plus"></span>
+									</a>
+								</div>
+								<div class="btn-group pull-right">
+									<a href="<$mt:Var name="script_url"$>?__mode=list_category&amp;blog_id=<$mt:Var name="blog_id"$>" class="btn btn-default btn-xs" target="_blank">
+										<span class="glyphicon glyphicon-cog"></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label>Insert…</label>
+					<div class="btn-toolbar">
+						<div class="btn-group">
+							<button type="button" class="btn btn-default" id="actionInsertYouTube">YouTube</button>
+							<button type="button" class="btn btn-default" id="actionInsertVia">Via</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="mtl-section">

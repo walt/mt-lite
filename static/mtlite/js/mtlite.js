@@ -85,4 +85,71 @@ $('#actionDeleteObj').click(function(event) {
     $('#objForm').submit();
 });
 
+$('#categoryChooser input[type=checkbox]').click(function(event) {
+	var categories = $('#categoryChooser input[type=checkbox]');
+	var category_ids = [];
+
+	for (var i = 0; i < categories.length; i++) {
+		if (categories[i].checked) {
+			category_ids.push(categories[i].getAttribute('data-id'));
+		}
+	}
+
+	$('input[name="category_ids"]').val(category_ids.join(','));
+});
+
+$('#createCategoryModal').on('shown.bs.modal', function() {
+	$('#createCategoryForm input[name=label]').focus();
+});
+
+$('#createCategoryForm input[name=label]').keyup(function(event) {
+	 var status = $('#createCategoryForm input[name=label]').val() == '' ? true : false;
+	 $('#actionCreateCategory').attr('disabled', status);
+});
+
+$('#actionCreateCategory').click(function(event) {
+	var magic_token = $('#objForm input[name=magic_token]').val();
+	var blog_id = $('#objForm input[name=blog_id]').val();
+	var label = $('#createCategoryForm input[name=label]').val();
+	var url = $('#createCategoryForm').attr('action');
+
+	$.ajax({
+		data: {
+			'__mode': 'js_add_category',
+			'magic_token': magic_token,
+			'blog_id': blog_id,
+			'parent': '0',
+			'_type': 'category',
+			'label': label
+		},
+		method: 'POST',
+		url: url
+	}).done(function(msg) {
+		$('#categoryChooser').prepend(
+			'<div class="checkbox"><label><input type="checkbox" name="add_category_id_' +
+			msg.result.id + '" data-id="' + msg.result.id + '" checked>' + label + '</label></div>'
+		);
+		$('#createCategoryModal').modal('hide');
+		$('#createCategoryForm input[name=label]').val('');
+	});
+});
+
+$('#actionInsertYouTube').click(function(event) {
+    event.preventDefault();
+
+    var txt = '<p><iframe width="620" height="349" src="http://www.youtube.com/embed/XXXXXXXXXXX?rel=0" frameborder="0" allowfullscreen></iframe></p>';
+    var box = $('textarea[name="text"]');
+
+    box.val(box.val() + '\n\n' + txt);
+});
+
+$('#actionInsertVia').click(function(event) {
+    event.preventDefault();
+
+    var txt = '<small>via [XXXX](XXXX)</small>';
+    var box = $('textarea[name="text"]');
+
+    box.val(box.val() + '\n\n' + txt);
+});
+
 });
