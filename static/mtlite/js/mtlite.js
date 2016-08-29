@@ -134,22 +134,4 @@ $('#actionCreateCategory').click(function(event) {
 	});
 });
 
-$('#actionInsertYouTube').click(function(event) {
-    event.preventDefault();
-
-    var txt = '<p><iframe width="620" height="349" src="http://www.youtube.com/embed/XXXXXXXXXXX?rel=0" frameborder="0" allowfullscreen></iframe></p>';
-    var box = $('textarea[name="text"]');
-
-    box.val(box.val() + '\n\n' + txt);
-});
-
-$('#actionInsertVia').click(function(event) {
-    event.preventDefault();
-
-    var txt = '<small>via [XXXX](XXXX)</small>';
-    var box = $('textarea[name="text"]');
-
-    box.val(box.val() + '\n\n' + txt);
-});
-
 });
