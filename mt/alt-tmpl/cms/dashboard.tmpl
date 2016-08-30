@@ -2,6 +2,7 @@
 <$mt:Var name="page_name" value="Blogs"$>
 <mt:Else>
 <$mt:Var name="page_name" value="$blog_name"$>
+<$mt:Var name="has_calendar_heatmap" value="1"$>
 </mt:Unless>
 <mt:Include name="mtb-include/config.tmpl">
 <mt:Include name="mtb-include/header.tmpl">
@@ -44,7 +45,7 @@
 					<div class="mtl-stats">
 						<h5>Post Activity</h5>
 						<div id="mtlStatGraph"></div>
-						<p class="text-muted"><span id="mtlStatNote">$1 posts in the past $2 days.</span> <a href="<$mt:Var name="path_to_stats"$>" id="mtlStatSource">XML</a></p>
+						<p class="text-muted"><span id="mtlStatNote">$1 posts in the past $2 days.</span> <a href="<$mt:Var name="path_to_stats"$>0/<$mt:Var name="blog_id" zero_pad="3"$>/<$mt:Var name="author_id" zero_pad="3"$>/entry.xml" id="mtlStatSource">XML</a></p>
 					</div>
 				</div>
 			</div>

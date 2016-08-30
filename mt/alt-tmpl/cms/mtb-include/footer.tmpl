@@ -10,7 +10,9 @@
 </mt:Unless>
 <script src="<$mt:Var name="path_to_jquery"$>"></script>
 <script src="<$mt:Var name="path_to_bootstrap"$>js/bootstrap.min.js"></script>
-<script src="//www.google.com/jsapi"></script>
+<mt:If name="has_calendar_heatmap">
+<script src="<$mt:Var name="path_to_d3"$>"></script>
+</mt:If>
 <script src="<$mt:Var name="path_to_extras"$>js/mtlite.js"></script>
 </body>
 </html>

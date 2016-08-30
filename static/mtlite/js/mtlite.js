@@ -1,76 +1,80 @@
-google.load('visualization', '1', {packages:['corechart']});
+$(function() {
 
-$(document).ready(function() {
+$.get($('#mtlStatSource').attr('href'), function(data) {
+	var calendar_heatmap_data = {
+		'dates': [],
+		'total': 0,
+		'max': 0
+	};
 
-var graph = new StatGraph();
+	$(data).find('count[date]').each(function() {
+		var count = parseInt($(this).text());
 
-function StatGraph() {
-	var _this       = this,
-	    source      = $('#mtlStatSource'),
-	    destination = $('#mtlStatGraph');
+		calendar_heatmap_data.dates.push({
+			'date': new Date(
+				parseInt($(this).attr('date').slice(0, 4)),
+				parseInt($(this).attr('date').slice(4, 6)) - 1,
+				parseInt($(this).attr('date').slice(6, 8))
+			),
+			'count': count
+		});
 
-	if(!source.length || !destination.length) {
-		return false;
+		calendar_heatmap_data.total = calendar_heatmap_data.total + count;
+
+		calendar_heatmap_data.max =
+			count > calendar_heatmap_data.max ?
+			count : calendar_heatmap_data.max;
+	});
+
+	var square_size = 10,
+		square_margin = 2,
+		x_multiplier = 0,
+		y_multiplier = calendar_heatmap_data.dates[0].date.getDay();
+
+	var svg_width = square_size + square_margin;
+		svg_width = svg_width * Math.ceil(calendar_heatmap_data.dates.length / 7);
+		svg_width = svg_width - square_margin;
+	if (y_multiplier == 6) {
+		svg_width = svg_width + (square_size + square_margin);
 	}
 
-	this.source_url  = source.attr('href');
-	this.data_table  = new google.visualization.DataTable();
-	this.chart       = new google.visualization.AreaChart(destination.get(0));
-	this.description = $('#mtlStatNote');
+	var svg_height = ((square_size + square_margin) * 7) - square_margin;
 
-	this.buildGraph = function() {
-		$.get(_this.source_url, function(data) {
-			var $xml = $(data),
-			    graph_data = [],
-			    total = 0,
-			    msg;
+	var svg = d3.select('#mtlStatGraph')
+		.append('svg')
+		.attr('viewBox', '0 0 ' + svg_width + ' ' + svg_height)
+		.attr('preserveAspectRatio', 'xMinYMin meet')
+		.style('max-width', svg_width * 2 + 'px');
 
-			$xml.find('count[date]').each(function(index) {
-				var date  = new Date(parseInt($(this).attr('date').slice(0, 4)), parseInt($(this).attr('date').slice(4, 6)) - 1, parseInt($(this).attr('date').slice(6, 8))),
-				    count = parseInt($(this).text()),
-				    fake_count = Math.floor(Math.random() * 50) + 1;
-				graph_data.push([date, count]);
-				total = total + count;
-			});
+	var color = d3.scaleLinear()
+		.range(['#f2f2f2', '#337ab7'])
+		.domain([0, calendar_heatmap_data.max]);
 
-			_this.data_table.addColumn('date', 'Date');
-			_this.data_table.addColumn('number', 'Posts');
-			_this.data_table.addRows(graph_data);
+	for (var i = 0; i < calendar_heatmap_data.dates.length; i++) {
+		svg.append('rect')
+			.attr('x', (square_size + square_margin) * x_multiplier)
+			.attr('y', (square_size + square_margin) * y_multiplier)
+			.attr('width', square_size)
+			.attr('height', square_size)
+			.style('fill', color(calendar_heatmap_data.dates[i].count));
 
-			_this.drawChart();
+		if (y_multiplier < 6) {
+			y_multiplier = y_multiplier + 1;
+		} else  {
+			x_multiplier = x_multiplier + 1;
+			y_multiplier = 0;
+		}
+	}
 
-			msg = _this.description.text();
-			msg = msg.replace('$1', total);
-			msg = msg.replace('$2', graph_data.length);
-			_this.description.text(msg);
-			_this.description.parent().toggle();
-		});
-	};
+	var note = $('#mtlStatNote');
+	var msg = note.text();
 
-	this.drawChart = function() {
-		this.chart.draw(this.data_table, {
-			backgroundColor: {
-				strokeWidth: 1
-			},
-			hAxis: {
-				baselineColor: '#ccc'
-			},
-			legend: {
-				position: 'none'
-			},
-			theme: 'maximized',
-			vAxis: {
-				baselineColor: '#ccc'
-			}
-		});
-	};
+	msg = msg.replace('$1', calendar_heatmap_data.total);
+	msg = msg.replace('$2', calendar_heatmap_data.dates.length);
 
-	this.buildGraph();
-
-	$(window).resize(function() {
-		_this.drawChart();
-	});
-}
+	note.text(msg);
+	note.parent().toggle();
+});
 
 $('.disabled').click(function(event) {
     event.preventDefault();

@@ -126,6 +126,11 @@ html, body {
 	margin-bottom: 15px;
 }
 
+.mtl-stats svg {
+	display: block;
+	margin: 0 auto;
+}
+
 .mtl-stats p {
 	display: none;
 	margin-top: 15px;
